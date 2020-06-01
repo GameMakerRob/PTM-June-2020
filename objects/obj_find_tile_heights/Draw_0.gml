@@ -1,9 +1,11 @@
-if (!surface_exists(surf) ) surf = surface_create(160, 16);
+sprite = spr_tiles_test;
+
+if (!surface_exists(surf) ) surf = surface_create(sprite_get_width(sprite), sprite_get_height(sprite));
 
 surface_set_target(surf);
 draw_clear_alpha(0, 0);
 
-draw_sprite(spr_tiles_test, 0, 0, 0);
+draw_sprite(sprite, 0, 0, 0);
 draw_set_colour(c_white);
 surface_reset_target();
 
@@ -11,8 +13,8 @@ draw_surface(surf, 0, 0);
 
 var tile_size = 16;
 var count = 0;
-var vertical_tiles = (sprite_get_height(spr_tiles_test) / tile_size);
-var horizontal_tiles = (sprite_get_width(spr_tiles_test) / tile_size);
+var vertical_tiles = (sprite_get_height(sprite) / tile_size);
+var horizontal_tiles = (sprite_get_width(sprite) / tile_size);
 
 for (var yy = 0; yy < vertical_tiles; yy ++){
 
@@ -57,7 +59,7 @@ for (var yy = 0; yy < vertical_tiles; yy ++){
 }
 
 for (var i = 0; i < ds_list_size(tile_heights_top); i ++){
-	show_debug_message("Tile: " + string(floor(i/tile_size)) + " | column: " + string(tile_size mod i) + " | height: " + string(tile_heights_top[| i]) );
+	show_debug_message("Tile: " + string(floor(i / tile_size)) + " | column: " + string(i mod tile_size) + " | height: " + string(tile_heights_top[| i]) );
 }
 
 room_goto_next();
