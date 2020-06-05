@@ -19,7 +19,7 @@ globalvar ga_grid, ga_tiles, ga_heights, GRID_SIZE;
 	 - Platform
 	 - Wall (Which Direction can be passed
 */
-GRID_SIZE = 64;
+GRID_SIZE = 16;
 
 #region GA_TILES
 var tileCount = 0;

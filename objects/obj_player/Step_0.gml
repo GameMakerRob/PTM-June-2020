@@ -1,7 +1,7 @@
 #region CONTROLS
 
-key_left = keyboard_check(vk_left);
-key_right = keyboard_check(vk_right);
+key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
+key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 if (keyboard_check_pressed(vk_space)) key_jump = true else key_jump = false;
 
 #endregion
@@ -132,4 +132,4 @@ if (vsp < 0){
 //Testing
 plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
 
-if (keyboard_check_pressed(vk_backspace)) room_restart();
+if (keyboard_check_pressed(vk_f12)) room_restart();
