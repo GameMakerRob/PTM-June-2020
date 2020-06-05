@@ -20,7 +20,7 @@ bottom_middle_height = GRID_SIZE;
 plHeight = ((bbox_bottom mod GRID_SIZE) + 1);
 
 //used to get player's facing direction
-facing = 0;
+facing = 1;
 
 enum states{
 	IDLE,
@@ -30,4 +30,4 @@ enum states{
 sprite_array[states.IDLE] = spr_player_idle;
 sprite_array[states.WALK] = spr_player_walk;
 
-sprite_index = spr_player_idle;
+//sprite_index = spr_player_idle;
