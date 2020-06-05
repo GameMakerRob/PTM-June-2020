@@ -1,80 +1,132 @@
-/*
+#region CONTROLS
 
-if (global.HELD_LEFT){
+key_left = keyboard_check(vk_left);
+key_right = keyboard_check(vk_right);
+if (keyboard_check_pressed(vk_space)) key_jump = true else key_jump = false;
+
+#endregion
+
+#region HORIZONTAL
+
+hsp = (key_right - key_left) * MOVE_SPEED;
+
+if hsp <= 0 bbox_side = bbox_left else bbox_side = bbox_right;
+
+repeat abs(hsp){
+	bottom_side = tilemap_get_at_pixel(tilemap, bbox_side + sign(hsp), bbox_bottom);
+	top_side = tilemap_get_at_pixel(tilemap, bbox_side + sign(hsp), bbox_top);
 	
-	repeat ( abs (move_speed) ){
-		var lay_id = layer_get_id("Ground");
-		var map_id = layer_tilemap_get_id(lay_id);
-		var tile = tilemap_get_at_pixel(map_id, x - 1, y);
-		var column = (x - 1) mod TILE_SIZE;
-		height = global.tile_heights_top[| (tile * TILE_SIZE) + column];
-		
-		if (y mod TILE_SIZE) < height x --;
-		
-		//show_message("(y mod TILE_SIZE): " + string((y mod TILE_SIZE)) + " | height: " + string(height));
+	if (bottom_side != 1) && (top_side != 1){
+		//1-ways
+		if (ga_tiles[bottom_side, 3] != 0) && (ga_tiles[bottom_side, 3] != sign(hsp) ) || (ga_tiles[top_side, 3] != 0) && (ga_tiles[top_side, 3] != sign(hsp) ){
+			hsp = 0;
+			break;
+		}else{
+			x += sign(hsp);
+		}
+	}else{
+		hsp = 0;
+		break;
 	}
 }
 
-if (global.HELD_RIGHT){
-		repeat ( abs (move_speed) ){
-		var lay_id = layer_get_id("Ground");
-		var map_id = layer_tilemap_get_id(lay_id);
-		var tile = tilemap_get_at_pixel(map_id, x + 1, y);
-		var column = (x + 1) mod TILE_SIZE;
-		height = global.tile_heights_top[| (tile * TILE_SIZE) + column];
-		
-		if (y mod TILE_SIZE) < height x ++;
-		
-		//show_message("(y mod TILE_SIZE): " + string((y mod TILE_SIZE)) + " | height: " + string(height));
-	}	
+left = tilemap_get_at_pixel(tilemap, bbox_left, bbox_bottom);
+right = tilemap_get_at_pixel(tilemap, bbox_right, bbox_bottom);
+middle = tilemap_get_at_pixel(tilemap, x, bbox_bottom);
+
+if (ga_tiles[left, 1] == true) || (ga_tiles[right, 1] == true) || (ga_tiles[middle, 1] == true){
+	isOnSlope = true;	
+}else{
+	isOnSlope = false;	
 }
-*/
-
-
-
-hsp = (global.HELD_RIGHT - global.HELD_LEFT) * move_speed;
-
-scr_move_horizontally(hsp);
-
-if (vsp != 0){
-
-	if (vsp < 0) bbox_side = bbox_top; else bbox_side = bbox_bottom;
-
-	repeat ( abs (vsp) ){
-		var lay_id = layer_get_id("Ground");
-		var map_id = layer_tilemap_get_id(lay_id);
 	
-		var tile_left = tilemap_get_at_pixel(map_id, bbox_left, bbox_side + abs(vsp));
-		var tile_right = tilemap_get_at_pixel(map_id, bbox_right, bbox_side + abs(vsp));
+if (isOnSlope) && (vsp >= 0){
+	leftHeight = GRID_SIZE - ga_heights[left, bbox_left mod GRID_SIZE];
+	rightHeight = GRID_SIZE - ga_heights[right, bbox_right mod GRID_SIZE];
+	middleHeight = GRID_SIZE - ga_heights[middle, x mod GRID_SIZE];
+	plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
 	
-		//show_debug_message("tile_left: " + string(tile_left));
-		//show_debug_message("tile_right: " + string(tile_right));
+	tileHeight = max(leftHeight, rightHeight, middleHeight);
+	
+	diff = tileHeight - plHeight;
+	y -= (diff + 1);
+}
+
+#endregion
+
+#region VERTICAL MOVEMENT
+
+if vsp + GRAV <= GRID_SIZE vsp += GRAV;
+
+//FALLING
+if (vsp > 0) && (!isOnSlope){
+	repeat vsp{
+		bottom_left = tilemap_get_at_pixel(tilemap, bbox_left, bbox_bottom + 1);
+		bottom_middle = tilemap_get_at_pixel(tilemap, x, bbox_bottom + 1);
+		bottom_right = tilemap_get_at_pixel(tilemap, bbox_right, bbox_bottom + 1);
 		
-		var column_left = bbox_left mod TILE_SIZE;
-		var column_right = bbox_right mod TILE_SIZE;
-		
-		//show_debug_message("column_left: " + string(column_left));
-		//show_debug_message("column_right: " + string(column_right));
-		
-		var height_left = global.tile_heights_top[| (tile_left * TILE_SIZE) + column_left];
-		var height_right = global.tile_heights_top[| (tile_right * TILE_SIZE) + column_right];
-		
-		//show_debug_message("height_left: " + string(height_left));
-		//show_debug_message("height_right: " + string(height_right));
-		
-		if height_left > (y mod TILE_SIZE) && height_right > (y mod TILE_SIZE) y += sign(vsp);
-		
-		//show_debug_message("y mod TILE_SIZE): " + string(y mod TILE_SIZE));
-		
-		//show_message("(y mod TILE_SIZE): " + string((y mod TILE_SIZE)) + " | height: " + string(height));
+		//There's a tile below us - match height and stop falling
+		if (bottom_left > 0) || (bottom_middle > 0) || (bottom_right > 0){
+			//Check heights and fall by 1 if we're too high
+			bottom_left_height = GRID_SIZE - ga_heights[bottom_left, bbox_left mod GRID_SIZE];
+			bottom_middle_height = GRID_SIZE - ga_heights[bottom_middle, x mod GRID_SIZE];
+			bottom_right_height = GRID_SIZE - ga_heights[bottom_right, bbox_right mod GRID_SIZE];
+			
+			tileHeight = max(bottom_left_height, bottom_middle_height, bottom_right_height);
+			plHeightVsp = GRID_SIZE - bbox_bottom mod GRID_SIZE;
+			
+			diffvsp = GRID_SIZE - abs((plHeightVsp - tileHeight));
+			
+			
+			if (diffvsp > 1){
+				y ++;
+				/*bugfix
+				show_debug_message("Falling");
+				sprite_index = spr_player_col;
+				*/
+			}else{
+				//Stop falling if we're at the correct height
+				/*bugfix
+				show_debug_message("Landing");
+				sprite_index = spr_player;
+				*/
+				vsp = 0;
+				break;
+			}
+		}else{
+			//No tile below us
+			y ++;	
+		}
 	}
-	
-}
-/*
-if (global.HELD_UP){
-	y -= move_speed;	
 }
 
-if (global.HELD_DOWN){
-	y += move_speed;	
+//Bandaid
+if (isOnSlope) && (vsp >= 0){
+	vsp = 0;	
 }
+
+//
+if (key_jump) && (vsp == 0){
+	if 	(tilemap_get_at_pixel(tilemap, bbox_left, bbox_bottom + 1) > 0) || (tilemap_get_at_pixel(tilemap, x, bbox_bottom + 1) > 0) || (tilemap_get_at_pixel(tilemap, bbox_right, bbox_bottom + 1) > 0){
+		vsp = -JUMP_SPEED;
+	}
+}
+
+//JUMPING
+if (vsp < 0){
+	repeat abs(vsp){
+		if (tilemap_get_at_pixel(tilemap, bbox_left, bbox_top - 1) != 1) && (tilemap_get_at_pixel(tilemap, bbox_right, bbox_top - 1) != 1){
+			y --;
+		}else{
+			vsp = 0;
+			break;
+		}	
+	}
+}
+
+#endregion
+
+//Testing
+plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
+
+if (keyboard_check_pressed(vk_backspace)) room_restart();
