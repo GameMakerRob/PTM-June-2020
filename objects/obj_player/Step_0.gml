@@ -10,6 +10,9 @@ if (keyboard_check_pressed(vk_space)) key_jump = true else key_jump = false;
 
 hsp = (key_right - key_left) * MOVE_SPEED;
 
+//executes animation script - mv
+anim();
+
 if hsp <= 0 bbox_side = bbox_left else bbox_side = bbox_right;
 
 repeat abs(hsp){
