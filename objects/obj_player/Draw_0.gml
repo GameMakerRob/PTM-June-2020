@@ -1,5 +1,7 @@
 draw_self();
 
+draw_set_colour(c_red);
+draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, true);
 
 /* TESTING AND BUFIXING
 draw_set_font(fnt_test_lrg);

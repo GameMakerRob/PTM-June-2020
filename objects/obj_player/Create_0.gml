@@ -1,6 +1,6 @@
-#macro JUMP_SPEED 48
-#macro MOVE_SPEED 6
-#macro GRAV 4
+#macro JUMP_SPEED 12
+#macro MOVE_SPEED 2
+#macro GRAV 1
 
 hsp = 0;
 vsp = 0;
@@ -13,8 +13,8 @@ isOnSlope = false;
 bottom_left = 0;
 bottom_right = 0;
 bottom_middle = 0;
-bottom_left_height = 64;
-bottom_right_height = 64;
-bottom_middle_height = 64;
+bottom_left_height = GRID_SIZE;
+bottom_right_height = GRID_SIZE;
+bottom_middle_height = GRID_SIZE;
 
 plHeight = ((bbox_bottom mod GRID_SIZE) + 1);
