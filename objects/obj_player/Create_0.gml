@@ -24,10 +24,24 @@ facing = 1;
 
 enum states{
 	IDLE,
-	WALK
+	WALK,
+	ATTACK,
+	BLOCK
 }
 
 sprite_array[states.IDLE] = spr_player_idle;
 sprite_array[states.WALK] = spr_player_walk;
 
 //sprite_index = spr_player_idle;
+
+attackstat  = 3;
+defencestat = 4;
+defence     = 0;
+guarding    = 0; 
+attack      = 0;
+
+boomerang_active = false;
+boomerang_count  = 0;
+activeboomerangs = 0;
+
+has_potion = false;

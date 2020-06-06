@@ -4,6 +4,10 @@ key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 if (keyboard_check_pressed(vk_space)) key_jump = true else key_jump = false;
 
+key_primary   = keyboard_check(ord("Z"));
+key_secondary = keyboard_check_pressed(ord("X")); 
+key_guard	  = keyboard_check(vk_shift); 
+
 #endregion
 
 #region HORIZONTAL
@@ -128,6 +132,42 @@ if (vsp < 0){
 }
 
 #endregion
+
+#region Weapons and Defence
+//Primary weapons
+
+
+//Secondary weapons
+if(key_secondary)
+{
+	if(boomerang_active) && (activeboomerangs+1 <= boomerang_count)
+	{
+		with(instance_create_layer(x, y, "Instances", obj_boomerang))
+		{
+			if(other.image_xscale == 1) speed = 4 + other.hsp; else speed = -4 + -other.hsp;
+			image_xscale = other.image_xscale;
+		}
+		activeboomerangs++;
+	}
+}
+
+//guarding
+defence = defencestat;
+guarding = defencestat +5;
+
+if(key_guard)
+{
+	//halve movement speed
+	
+	defence = guarding;
+	
+}else
+{
+	defence = defencestat;
+}
+
+#endregion
+
 
 //Testing
 plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
