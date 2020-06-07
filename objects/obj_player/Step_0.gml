@@ -48,10 +48,10 @@ if (ga_tiles[left, 1] == true) || (ga_tiles[right, 1] == true) || (ga_tiles[midd
 }
 	
 if (isOnSlope) && (vsp >= 0){
-	leftHeight = GRID_SIZE - ga_heights[left, bbox_left mod GRID_SIZE];
-	rightHeight = GRID_SIZE - ga_heights[right, bbox_right mod GRID_SIZE];
-	middleHeight = GRID_SIZE - ga_heights[middle, x mod GRID_SIZE];
-	plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
+	leftHeight		= GRID_SIZE - ga_heights[left, bbox_left mod GRID_SIZE];
+	rightHeight		= GRID_SIZE - ga_heights[right, bbox_right mod GRID_SIZE];
+	middleHeight	= GRID_SIZE - ga_heights[middle, x mod GRID_SIZE];
+	plHeight		= GRID_SIZE - bbox_bottom mod GRID_SIZE;
 	
 	tileHeight = max(leftHeight, rightHeight, middleHeight);
 	
