@@ -7,8 +7,10 @@ draw_text(0, 44, "Potion: " + string(has_potion));
 
 draw_text(0, 88, "Attack: " + string(attackstat));
 draw_text(0, 100, "Defence: " + string(defence));
+draw_text(0, 112, "key_primary: " + string(key_primary));
 
 if(key_primary)
 {
-	draw_rectangle_color(x, y, x+32, y+32, c_red, c_red, c_red, c_red, false);
+	//Made an object so we can use that for hit_detection
+	//draw_rectangle_color(x, y, x+32, y+32, c_red, c_red, c_red, c_red, false);
 }

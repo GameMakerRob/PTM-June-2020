@@ -4,9 +4,9 @@ key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 if (keyboard_check_pressed(vk_space)) key_jump = true else key_jump = false;
 
-key_primary   = keyboard_check(ord("Z"));
-key_secondary = keyboard_check_pressed(ord("X")); 
-key_guard	  = keyboard_check(vk_shift); 
+if (keyboard_check_pressed(vk_control) || mouse_check_button_pressed(mb_left)) key_primary = true; else key_primary = false;
+if keyboard_check_pressed(ord("X")) key_secondary = true; else key_secondary = false;
+if keyboard_check(vk_shift) key_guard = true; else key_guard = false; 
 
 #endregion
 
@@ -175,3 +175,7 @@ if(key_guard)
 plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
 
 if (keyboard_check_pressed(vk_f12)) room_restart();
+
+if (key_primary){
+	var attack = instance_create_layer(x + (image_xscale * 16), y, layer, obj_attack);	
+}
