@@ -1,6 +1,7 @@
 enum e_monster_states{
 	idle,
 	attack,
+	return_to_start,
 }
 
 globalvar ga_grid, ga_tiles, ga_heights, GRID_SIZE;

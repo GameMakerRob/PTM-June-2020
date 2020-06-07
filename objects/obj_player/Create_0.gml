@@ -1,6 +1,7 @@
 #macro JUMP_SPEED 12
-#macro MOVE_SPEED 2
 #macro GRAV 1
+
+MOVE_SPEED = 2;
 
 hsp = 0;
 vsp = 0;
