@@ -1,0 +1,10 @@
+DETECTION_RADIUS = 200; //How close does the player need to be for the bat to attack them?
+idle_timer = 0;
+HOVER_POWER = 2; //How much "bounce" should the bat have
+ATTACK_POWER = 5;
+state = e_monster_states.idle;
+detection_timer = 0;
+target_x = x;
+target_y = y;
+start_x = x;
+start_y = y;

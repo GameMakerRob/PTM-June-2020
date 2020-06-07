@@ -10,7 +10,7 @@ key_guard	  = keyboard_check(vk_shift);
 
 #endregion
 
-#region HORIZONTAL
+#region HORIZONTAL MOVEMENT
 
 hsp = (key_right - key_left) * MOVE_SPEED;
 
@@ -140,6 +140,7 @@ if (vsp < 0){
 //Secondary weapons
 if(key_secondary)
 {
+	/* Commented out for now as obj_boomerang doesn't exist - ROB
 	if(boomerang_active) && (activeboomerangs+1 <= boomerang_count)
 	{
 		with(instance_create_layer(x, y, "Instances", obj_boomerang))
@@ -149,6 +150,7 @@ if(key_secondary)
 		}
 		activeboomerangs++;
 	}
+	*/
 }
 
 //guarding
