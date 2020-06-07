@@ -4,6 +4,10 @@ enum e_monster_states{
 	return_to_start,
 }
 
+enum e_projectiles{
+	spitter,	
+}
+
 globalvar ga_grid, ga_tiles, ga_heights, GRID_SIZE;
 
 /*
