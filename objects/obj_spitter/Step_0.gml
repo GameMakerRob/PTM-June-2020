@@ -27,7 +27,7 @@ if (state == e_monster_states.attack){
 			
 			var projectile = instance_create_layer(x, y, layer, obj_projectile);
 			projectile.target = player;
-			projectile.spd = 6;
+			projectile.spd = 4;
 			projectile.attack = attack;
 			projectile.defence = 1;
 			projectile.hp = 1;
