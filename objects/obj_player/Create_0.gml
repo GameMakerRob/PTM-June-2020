@@ -50,3 +50,8 @@ boomerang_count  = 0;
 activeboomerangs = 0;
 
 has_potion = false;
+
+// Set all keys found to false;
+for (var i = 0; i < e_keys.last; i ++){
+	keys_found[i] = false;	
+}

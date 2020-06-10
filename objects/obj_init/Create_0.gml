@@ -1,3 +1,12 @@
+enum e_keys{
+	one,
+	two,
+	three,
+	four,
+	five,
+	last,
+}
+
 enum e_monster_states{
 	idle,
 	attack,
