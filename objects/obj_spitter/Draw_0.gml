@@ -1,6 +1,6 @@
 /// @description TESTING [OFF]
 
-draw_self();
+event_inherited();
 /*
 //Draw detection radius
 draw_set_colour(c_red);

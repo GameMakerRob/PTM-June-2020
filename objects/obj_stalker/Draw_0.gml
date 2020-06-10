@@ -1,5 +1,7 @@
 /// @description TESTING [OFF]
 
+event_inherited();
+
 draw_self();
 /*
 //Draw detection radius

@@ -1,3 +1,6 @@
+//Redice hit_timer
+event_inherited();
+
 if (state == e_monster_states.idle){
 	
 	#region IDLE
@@ -55,6 +58,12 @@ if (state == e_monster_states.attack){
 		}
 		
 		timer = 0;
+		
+		#region DAMAGE 
+
+		scr_monsters_attack();
+	
+		#endregion
 	}
 	
 	/*

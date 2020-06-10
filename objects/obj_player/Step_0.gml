@@ -1,3 +1,6 @@
+//Redice hit_timer
+event_inherited();
+
 #region CONTROLS
 
 key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
@@ -135,22 +138,27 @@ if (vsp < 0){
 
 #region Weapons and Defence
 //Primary weapons
-
+if (key_primary){
+	var attack = instance_create_layer(x + (image_xscale * 16), y, layer, obj_attack);	
+	attack.owner = id;
+}
 
 //Secondary weapons
 if(key_secondary)
 {
-	/* Commented out for now as obj_boomerang doesn't exist - ROB
 	if(boomerang_active) && (activeboomerangs+1 <= boomerang_count)
 	{
-		with(instance_create_layer(x, y, "Instances", obj_boomerang))
+		var boomerang = instance_create_layer(x, y, "player", obj_boomerang);
+		boomerang.attack = 5;
+		boomerang.owner = id;
+		
+		with(boomerang)
 		{
 			if(other.image_xscale == 1) speed = 4 + other.hsp; else speed = -4 + -other.hsp;
 			image_xscale = other.image_xscale;
 		}
 		activeboomerangs++;
 	}
-	*/
 }
 
 //guarding
@@ -160,22 +168,18 @@ guarding = defencestat +5;
 if(key_guard)
 {
 	//halve movement speed
-	
+	MOVE_SPEED = 1;
 	defence = guarding;
 	
 }else
 {
+	MOVE_SPEED = 2;
 	defence = defencestat;
 }
 
 #endregion
 
-
 //Testing
 plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
 
 if (keyboard_check_pressed(vk_f12)) room_restart();
-
-if (key_primary){
-	var attack = instance_create_layer(x + (image_xscale * 16), y, layer, obj_attack);	
-}

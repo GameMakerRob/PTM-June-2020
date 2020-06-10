@@ -2,6 +2,7 @@ enum e_monster_states{
 	idle,
 	attack,
 	return_to_start,
+	dead,
 }
 
 enum e_projectiles{

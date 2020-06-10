@@ -1,3 +1,6 @@
+//Redice hit_timer
+event_inherited();
+
 if (state == e_monster_states.idle){
 	
 	#region IDLE - MAKE THE BAT HOVER
@@ -55,6 +58,12 @@ if (state == e_monster_states.attack){
 		x_dist -= MOVE_SPEED;	
 
 	}
+	
+	#region DAMAGE 
+
+	scr_monsters_attack();
+	
+	#endregion
 	
 	if (player == noone) state = e_monster_states.return_to_start;	
 	

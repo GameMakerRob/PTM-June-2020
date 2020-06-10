@@ -1,3 +1,5 @@
+event_inherited(); //inherited from obj_all_actors_PARENT
+
 #macro JUMP_SPEED 12
 #macro GRAV 1
 
@@ -27,7 +29,7 @@ enum states{
 	IDLE,
 	WALK,
 	ATTACK,
-	BLOCK
+	BLOCK,
 }
 
 sprite_array[states.IDLE] = spr_player_idle;
@@ -39,7 +41,9 @@ attackstat  = 3;
 defencestat = 4;
 defence     = 0;
 guarding    = 0; 
-attack      = 0;
+attack      = attackstat;
+hp			= 10;
+hp_max		= 10;
 
 boomerang_active = false;
 boomerang_count  = 0;

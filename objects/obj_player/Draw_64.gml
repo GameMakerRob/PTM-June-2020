@@ -1,5 +1,6 @@
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
+draw_set_colour(c_white);
 
 draw_text(0, 0, "Press f12 to restart");
 draw_text(0, 22, "Boomerangs: " + string(boomerang_count));
