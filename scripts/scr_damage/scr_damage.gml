@@ -7,6 +7,7 @@ var attacker = argument0;
 var defender = argument1;
 
 var damage = attacker.attack - defender.defence;
+damage = clamp(damage, 1, 10);
 
 if (damage > 0){
 	defender.hp -= damage;
