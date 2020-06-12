@@ -67,6 +67,7 @@ if (isOnSlope) && (vsp >= 0){
 #region VERTICAL MOVEMENT
 
 if vsp + GRAV <= GRID_SIZE vsp += GRAV;
+if vsp > MAX_GRAV vsp = MAX_GRAV;
 
 //FALLING
 if (vsp > 0) && (!isOnSlope){

@@ -2,6 +2,7 @@ event_inherited(); //inherited from obj_all_actors_PARENT
 
 #macro JUMP_SPEED 12
 #macro GRAV 1
+#macro MAX_GRAV 8
 
 MOVE_SPEED = 2;
 
@@ -55,3 +56,6 @@ has_potion = false;
 for (var i = 0; i < e_keys.last; i ++){
 	keys_found[i] = false;	
 }
+
+spawn_x = x;
+spawn_y = y;
