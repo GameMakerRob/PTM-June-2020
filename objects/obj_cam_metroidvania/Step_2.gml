@@ -6,6 +6,14 @@
 if (instance_exists(obj_player) ){
 	mask = collision_point(obj_player.x, obj_player.y, obj_room_mask, false, false);
 	
+	if (mask != mask_prev){
+		with obj_player{
+			spawn_x = x;
+			spawn_y = y;
+		}
+		
+		mask_prev = mask;
+	}
 	if (mask != noone){
 		
 		#region Get the edges of the current mask

@@ -184,3 +184,4 @@ if(key_guard)
 plHeight = GRID_SIZE - bbox_bottom mod GRID_SIZE;
 
 if (keyboard_check_pressed(vk_f12)) room_restart();
+if (keyboard_check_pressed(vk_backspace) ) hp -= 1000;

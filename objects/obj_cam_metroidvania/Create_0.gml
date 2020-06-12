@@ -11,3 +11,4 @@ cx = 0;
 cy = 0;
 
 state = 0;
+mask_prev = noone;
