@@ -3,6 +3,8 @@ draw_set_valign(fa_top);
 draw_set_colour(c_white);
 
 draw_text(0, 0, "HP: " + string(hp) + "/" + string(hp_max) );
+draw_text(0, 12, "x: " + string(x) );
+draw_text(0, 24, "y: " + string(y) );
 
 //draw_text(0, 0, "Press f12 to restart");
 /*
